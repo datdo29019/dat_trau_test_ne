@@ -1,0 +1,142 @@
+context('Entity type', () => {
+  beforeEach(() => {
+
+    cy.visit('https://va-test.vnlp.ai/')
+
+  })
+
+ // https://on.cypress.io/interacting-with-elements
+
+  it('.type() - type into a DOM element', () => {
+    // https://on.cypress.io/type
+    cy.get('#username')
+
+      // Delay each keypress by 0.2 sec
+      .type('dat.do')
+      .should('have.value', 'dat.do')
+
+    cy.get('#password')
+      .type('taonemay123').should('have.value', 'taonemay123')
+
+    cy.get('.btn').click()
+
+//API
+ cy.intercept('/auth/login').as('login')
+ //API
+ cy.intercept('/entity-types').as('entity-types')
+    //Get Home
+    cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+
+    cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
+
+
+    cy.get('.js-collapsed.active > .js-panel-body > :nth-child(5) > a').click()
+
+//API
+ cy.intercept('/v1/entity-types').as('Entity')
+    
+    cy.get('.vertical-align-flex > .btn').click()
+
+    cy.get(':nth-child(1) > .ng-untouched').focus()
+      .type('Entity1').should('have.value','Entity1')
+
+    cy.get(':nth-child(2) > .ng-untouched').focus()
+      .type('Entity1-Description').should('have.value','Entity1-Description')
+
+
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(2) > .p-dropdown-item').click()
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(3) > .p-dropdown-item').click()
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(1) > .p-dropdown-item').click()
+
+    cy.get('.side-right-footer > .btn-vnlp').click()
+    cy.get('.p-toast-message-content').invoke('text')
+     .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationCreated successfully");
+       //Check noti when save successfully
+      })
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+
+
+
+    cy.get('.vertical-align-flex > .btn').click()
+    cy.wait('@Entity')
+
+    cy.get(':nth-child(1) > .ng-valid').focus()
+      .type('Entity1').should('have.value','Entity1')
+
+    cy.get(':nth-child(2) > .ng-valid').focus()
+      .type('Entity1-Description').should('have.value','Entity1-Description')
+
+
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(2) > .p-dropdown-item').click()
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(3) > .p-dropdown-item').click()
+    cy.get('.p-dropdown-label').click()
+      cy.get(':nth-child(1) > .p-dropdown-item').click()
+
+cy.wait('@entity-types')
+//Check trùng Entity
+    cy.get('.side-right-footer > .btn-vnlp').click()
+    cy.get('.p-toast-message-content').invoke('text')
+     .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationEntity type is existed");
+       //Check noti
+      })
+
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+
+
+    cy.get(':nth-child(1) > .ng-valid').focus()
+      .type('1').should('have.value','Entity11')
+
+    cy.get('.side-right-footer > .btn-vnlp').click()
+    cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationCreated successfully");
+       //Check noti when save successfully
+      })
+
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+
+//Search
+    cy.get('.input-search > input').focus()
+      .type('Entity11').should('have.value','Entity11')
+    cy.wait('@Entity')
+
+    cy.get('.p-paginator-left-content')
+      .invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal(" Showing 1 to 1 of 1 entries ");
+       //Check Text show
+       })
+
+//Search
+    cy.get('.input-search > input').focus()
+      .type('{del}{selectall}{backspace}')
+      .type('Entity111').should('have.value','Entity111')
+    cy.wait('@Entity')
+
+    cy.get('.p-paginator-left-content')
+      .invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal(" Showing 0 to 0 of 0 entries ");
+       //Check Text show
+       })
+
+
+
+
+  })   
+}) 
