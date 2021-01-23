@@ -33,8 +33,8 @@ context('Train NLP', () => {
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
 //API
- cy.intercept('/bots').as('bot')
-    cy.wait('@bot')
+ cy.intercept('/bots').as('bots')
+    cy.wait('@bots')
     cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
   
   cy.get('.side-left > :nth-child(4) > a').click()
@@ -55,7 +55,7 @@ context('Train NLP', () => {
 
   cy.get('.side-left > :nth-child(2) > .js-single-menu > a').click()
   cy.get('[routerlink="../../../conversation/samples"] > .content-box > :nth-child(2)')
-cy.wait('@bot')
+cy.wait('@bots')
 cy.wait(1400)
    cy.get('[routerlink="../../../conversation/samples"] > .content-box > :nth-child(2)')
       .invoke('text')

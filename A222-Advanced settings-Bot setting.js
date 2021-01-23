@@ -1,4 +1,4 @@
-context('VA Models', () => {
+context('Advanced-Bot Setting', () => {
   beforeEach(() => {
 
     cy.visit('https://va-test.vnlp.ai/')

@@ -30,8 +30,8 @@ context('VA Models', () => {
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
 //API
- cy.intercept('/bots').as('bot')
-    cy.wait('@bot')
+ cy.intercept('/bots').as('bots')
+    cy.wait('@bots')
 
   cy.get('.side-left > :nth-child(4) > a').click()
   cy.get('.mb-2 > .btn').click()
@@ -186,7 +186,16 @@ cy.get('.p-dialog-header').should('be.contain','Create version')
            //Check Text show
            }) 
 
-  
+  cy.get('.side-left > :nth-child(4) > a').click()
+  cy.wait(500)
+  cy.get(':nth-child(1) > .table-quick-action > a.ng-star-inserted > .vnlp-icon').click()
+  cy.get('.p-dialog-content > :nth-child(4) > .btn-vnlp').click()
+      cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationDeleted successfully");
+       //Check noti when save successfully
+      })
 
 
   })    

@@ -135,8 +135,51 @@ cy.wait('@entity-types')
        //Check Text show
        })
 
+    cy.get('.input-search > input').click()
+      .type('{del}{selectall}{backspace}')
+    cy.wait(500)
+    cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(2)').click()
+    cy.get(':nth-child(1) > .ng-valid').focus()
+      .type('{del}{selectall}{backspace}')
+      .type('Entity2').should('have.value','Entity2')
 
+    cy.get(':nth-child(2) > .ng-valid').focus()
+      .type('{del}{selectall}{backspace}')
+      .type('Victor Nilsson-Lindelof').should('have.value','Victor Nilsson-Lindelof')
+    cy.get('.p-dropdown-label').click()
+    cy.get(':nth-child(2) > .p-dropdown-item').click()
+    cy.get('.side-right-footer > .btn-vnlp').click()
+    cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationSaved successfully");
+       //Check noti when save successfully
+      })
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+  cy.wait(500)
 
+cy.get(':nth-child(1) > .table-quick-action > .ng-star-inserted > .vnlp-icon').click()
+  cy.get(':nth-child(4) > .btn-vnlp').click()
+  cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationDeleted successfully");
+       //Check noti when save successfully
+      })
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+  cy.wait(500)
 
+  cy.get(':nth-child(1) > .table-quick-action > .ng-star-inserted > .vnlp-icon').click()
+  cy.get(':nth-child(4) > .btn-vnlp').click()
+  cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationDeleted successfully");
+       //Check noti when save successfully
+      })
+//Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
   })   
 }) 

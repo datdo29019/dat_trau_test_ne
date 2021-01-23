@@ -30,8 +30,8 @@ context('Teen codes', () => {
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
 //API
- cy.intercept('/bots').as('bot')
-    cy.wait('@bot')
+ cy.intercept('/bots').as('bots')
+    cy.wait('@bots')
     cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
 
     cy.get('.js-panel-body > :nth-child(8) > a').click()
@@ -52,7 +52,7 @@ cy.wait(700)
        expect(toastText).to.equal("Showing 0 to 0 of 0 entries");
        //Check Text show
        })
-cy.wait('@bot')
+cy.wait('@bots')
     cy.get('.justify-content-between > .btn').click()
     cy.get('.height-33px').focus()
       .type('Không').should('have.value','Không')

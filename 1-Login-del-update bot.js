@@ -153,6 +153,11 @@ cy.wait('@bot')
     cy.get('.p-toast-icon-close-icon').click()
 
      cy.wait('@bot')
+     cy.wait(1000)
+     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(2) > a').click()
+     cy.wait(2000)
+     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(1) > a').click()
+     cy.wait(2000)
      cy.get('[tooltipposition="top"] > .vnlp-icon').then(ele => {
         ele[0].click() // 2Button Submit if choose [1] = Button 2 - [0] = Button 1
         })
@@ -167,6 +172,7 @@ cy.wait('@bot')
       })
 
     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(3) > a').click()
+    cy.wait(2000)
     cy.get('.table-quick-action > .ng-star-inserted > .vnlp-icon').click()
     cy.get(':nth-child(4) > .btn-vnlp').click()
       cy.get('.p-toast-message-content').invoke('text')

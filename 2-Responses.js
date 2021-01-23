@@ -56,6 +56,8 @@ cy.wait('@login')
        expect(toastText).to.equal("NotificationSaved successfully");
        //Check noti when save successfully
       })
+ 	 //Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
 
 //Create Responses type "Button"
     cy.get(':nth-child(1) > .btn').click()	//Create Responses
@@ -103,6 +105,8 @@ cy.wait('@login')
        expect(toastText).to.equal("NotificationSaved successfully");
        //Check noti when save successfully
       })
+ 	 //Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
 
 //Create Responses type "Card"
  	cy.get(':nth-child(1) > .btn').click()
@@ -158,7 +162,9 @@ cy.wait('@login')
        expect(toastText).to.equal("NotificationSaved successfully");
        //Check noti when save successfully
       })
-
+ 	 //Tắt nút X khi thông báo Successfully
+    cy.get('.p-toast-icon-close-icon').click()
+    
 
 //Create Responses type "Quick Replies"
 	cy.get(':nth-child(1) > .btn').click()
@@ -213,6 +219,7 @@ cy.wait('@login')
 	cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
 	cy.get(':nth-child(2) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -223,6 +230,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(3) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -234,6 +242,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(4) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -244,6 +253,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(5) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -254,6 +264,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(6) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -264,6 +275,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(7) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -276,6 +288,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-45.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(2) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -287,6 +300,7 @@ cy.wait('@login')
     cy.get('.ng-tns-c58-45.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
     cy.get(':nth-child(3) > .p-dropdown-item').click()
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -308,6 +322,7 @@ cy.wait('@login')
 	cy.get('.input-search > input').focus()
 	  .type('MixiGaming').should('have.value','MixiGaming')
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -320,6 +335,7 @@ cy.wait('@login')
 	  .type('{del}{selectall}{backspace}')
 	  .type('MixiGaming1').should('have.value','MixiGaming1')
 	cy.wait('@api')
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -332,7 +348,7 @@ cy.wait('@login')
 	  .type('{del}{selectall}{backspace}')
 	  .type('MixiGaming2').should('have.value','MixiGaming2')
 	cy.wait('@api')
-
+	cy.wait(500)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;
