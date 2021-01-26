@@ -24,6 +24,7 @@ context('Stopwords', () => {
  cy.intercept('/auth/login').as('login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+    cy.wait(3500)  
 //API
  cy.intercept('/bots').as('bot')
  

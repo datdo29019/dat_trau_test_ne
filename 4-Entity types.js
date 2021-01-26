@@ -26,7 +26,7 @@ context('Entity type', () => {
  cy.intercept('/entity-types').as('entity-types')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
-
+cy.wait(4000)
     cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
 
 

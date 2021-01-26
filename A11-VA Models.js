@@ -29,9 +29,10 @@ context('VA Models', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+    cy.wait(3500)  
 //API
  cy.intercept('/bots').as('bots')
-    cy.wait('@bots')
+
 
   cy.get('.side-left > :nth-child(4) > a').click()
   cy.get('.mb-2 > .btn').click()

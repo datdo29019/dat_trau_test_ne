@@ -32,9 +32,10 @@ context('Test NLP', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+    cy.wait(3500)  
 //API
  cy.intercept('/bots').as('bot')
-    cy.wait('@bot')
+
   cy.get('[joyridestep="step3"] > .d-block > .vnlp-icon').click()
   cy.get('.mb-3').focus()
     .type('hello').should('have.value','hello')

@@ -29,7 +29,7 @@ context('Proactive messages', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
-
+    cy.wait(3500)
     cy.get('.side-left > :nth-child(5) > a').click()
     cy.get('.justify-content-between > .btn').click()
 
@@ -50,6 +50,7 @@ context('Proactive messages', () => {
 	cy.get('.row > :nth-child(1) > div > .ng-untouched').focus()
 	  .type('Proactive messages').should('have.value','Proactive messages')
 	 cy.get('.text-right > .btn').click({ force: true })
+	 cy.wait(500)
     cy.get('.p-toast-message-content').invoke('text')
       .then((text)=>{
        const toastText = text;
@@ -101,12 +102,12 @@ context('Proactive messages', () => {
 
 	cy.get('.text-right > .btn').click({ force: true }).then(e => {
 	cy.get('.row > :nth-child(2) > :nth-child(1) > .error-validate').should('be.exist').and('have.contain','expired_time_required')
-    cy.get('.section-main > :nth-child(1) > :nth-child(6)').should('be.exist').and('have.contain','at_least_one_value')
-    cy.get('.section-main > :nth-child(3)').should('be.exist').and('have.contain','at_least_one_value')
+    cy.get('.section-main > :nth-child(1) > :nth-child(6)').should('be.exist').and('have.contain','This field is required')
+    cy.get('.section-main > :nth-child(3)').should('be.exist').and('have.contain','This field is required')
   }) //Khi bấm Save. check class .erro-validate. //
 
 
-	cy.get('[placeholder="second"]').focus().type('1')	
+	cy.get('[placeholder="Second"]').focus().type('1')	
 	cy.get('.p-dropdown-label > .ng-star-inserted').click({ force: true })
 	cy.get(':nth-child(1) > .p-dropdown-item > .ng-star-inserted').click({ force: true })
 
@@ -143,8 +144,8 @@ context('Proactive messages', () => {
 
   	cy.get('[placeholder="Day"]').focus().type('1')
   	cy.get('[placeholder="Hour"]').focus().type('1')
-  	cy.get('[placeholder="minute"]').focus().type('1')
-  	cy.get('[placeholder="second"]').focus()
+  	cy.get('[placeholder="Minute"]').focus().type('1')
+  	cy.get('[placeholder="Second"]').focus()
   	  .type('{del}{selectall}{backspace}').type('2')
 
   	cy.get('.p-autocomple > .p-autocomplete-multiple-container').click()
@@ -157,10 +158,10 @@ context('Proactive messages', () => {
 	cy.get(':nth-child(2) > .p-dropdown-item').click({ force: true })
 
 	cy.get(':nth-child(5) > .ng-untouched > .p-autocomplete > .p-autocomplete-multiple-container')
-	  .type('Quick1').type('{enter}')
+	  .type('Start').type('{enter}')
 	cy.get('.p-autocomplete-item').click({ force: true })
   	cy.get('.p-autocomplete-token')
-  	  .should('have.contain', 'Quick1')
+  	  .should('have.contain', 'Start')
 
 
 
@@ -182,14 +183,14 @@ context('Proactive messages', () => {
     cy.get('.p-toast-message-content').invoke('text')
       .then((text)=>{
        const toastText = text;
-       expect(toastText).to.equal("Notificationedit_message_success");
+       expect(toastText).to.equal("NotificationUpdated successfully");
        //Check noti when save successfully
       })
     //Tắt nút X khi thông báo Successfully
     cy.get('.p-toast-icon-close-icon').click()
 
     cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(1)').should('have.contain','Active')
-    cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(3)').should('have.contain','Quick1')
+    cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(3)').should('have.contain','Start')
     cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(4)').should('have.contain','')
     cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(5)').should('have.contain','VIP')
    	  cy.get('.box-small-positive')    .invoke('text')
@@ -206,14 +207,14 @@ cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(4)').click()
 
   	cy.get('[placeholder="Day"]').focus().type('{del}{selectall}{backspace}').type('0')
   	cy.get('[placeholder="Hour"]').focus().type('{del}{selectall}{backspace}').type('0')
-  	cy.get('[placeholder="minute"]').focus().type('{del}{selectall}{backspace}').type('0')
+  	cy.get('[placeholder="Minute"]').focus().type('{del}{selectall}{backspace}').type('0')
 	cy.get('.p-autocomple > .p-autocomplete-multiple-container > .p-autocomplete-token > .p-autocomplete-token-icon')
 	  .click()
 	cy.get('.text-right > .btn').click({ force: true })
     cy.get('.p-toast-message-content').invoke('text')
       .then((text)=>{
        const toastText = text;
-       expect(toastText).to.equal("Notificationedit_message_success");
+       expect(toastText).to.equal("NotificationUpdated successfully");
        //Check noti when save successfully
       })
     //Tắt nút X khi thông báo Successfully
@@ -248,7 +249,34 @@ cy.get('.p-datatable-tbody > :nth-child(1) > :nth-child(4)').click()
     cy.get('#vnlp-chat-icon > img').click()
 
     cy.get('#vnlp-chat-input').focus()
-      .type()
+      .type('Start')
+      .type('{enter}')
+      cy.get(':nth-child(1) > .vnlp-message-content').should('have.contain','Start')
+    cy.get(':nth-child(2) > .vnlp-message-content').should('have.contain','ok Start')
+    cy.get(':nth-child(3) > .vnlp-message-content').should('have.contain','3')
+    cy.get(':nth-child(4) > .vnlp-message-content').should('have.contain','2')
 
+    cy.get('#vnlp-chat-input').focus()
+      .type('Ok bạn nhớ')
+      .type('{enter}')
+      cy.get(':nth-child(5) > .vnlp-message-content').should('have.contain','Ok bạn nhớ')
+      cy.get(':nth-child(6) > .vnlp-message-content').should('have.contain','Xin lỗi, Virtual Agent không tìm thấy thông tin, vui lòng thử lại sau.')
+
+    cy.get('#vnlp-chat-popup-close').click()
+
+    cy.get('.table-quick-action > a > .vnlp-icon').click()
+    cy.get(':nth-child(4) > .btn-vnlp').click()
+    cy.get('.p-toast-message-content').invoke('text')
+      .then((text)=>{
+       const toastText = text;
+       expect(toastText).to.equal("NotificationDeleted successfully");
+       //Check noti when save successfully
+      })
+
+      
    })
 })
+
+
+
+

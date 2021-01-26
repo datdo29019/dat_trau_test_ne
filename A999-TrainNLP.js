@@ -32,9 +32,10 @@ context('Train NLP', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+    cy.wait(3500)  
 //API
  cy.intercept('/bots').as('bots')
-    cy.wait('@bots')
+
     cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
   
   cy.get('.side-left > :nth-child(4) > a').click()

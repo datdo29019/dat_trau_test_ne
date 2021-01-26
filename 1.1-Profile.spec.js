@@ -102,6 +102,11 @@ context('Profile', () => {
     cy.get('.error').focus()
       .type('127 Nguyễn Thị Thập, Liên Chiểu, Đà Nẵng').should('have.value','127 Nguyễn Thị Thập, Liên Chiểu, Đà Nẵng')
 
+cy.get('form.ng-dirty > :nth-child(2) > .ng-untouched')
+  .should('be.disabled')
+cy.get(':nth-child(3) > input')
+  .should('be.disabled')
+
     cy.get('.footer-info > .btn').click()
     cy.wait('@profile')
     cy.get('.p-toast-message-content').invoke('text')
@@ -110,6 +115,9 @@ context('Profile', () => {
        expect(toastText).to.equal("NotificationUpdate successfully");
        //Check noti when save successfully
       })
+
+
+
 
     })
   })  //Hiện tại đang có bug không có Thông báo khi sửa Profile

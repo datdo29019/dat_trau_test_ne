@@ -36,7 +36,7 @@ context('Login-Del-Update', () => {
 cy.wait('@login')
     cy.get('.new-content').click()
     cy.get(':nth-child(1) > .ng-untouched').type('Faker')
-    cy.get('.mb-3').type('Auto')
+    cy.get(':nth-child(3) > .mb-3').type('Auto')
 
     cy.get('.btn-vnlp').click()
     cy.get('.p-toast-message-content').invoke('text') //get . hiển thị popup, thông báo toast
@@ -58,7 +58,7 @@ cy.wait('@login')
       .type('Hide on Bush')
       .should('have.value','Hide on Bush')
 
-    cy.get('.mb-3')
+    cy.get(':nth-child(3) > .mb-3')
       .type('{del}{selectall}{backspace}',{ delay: 300 })
       .type('KOREAN_N/A')
       .should('have.value','KOREAN_N/A')
@@ -77,7 +77,7 @@ cy.wait('@login')
 
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
-cy.wait(1500)
+cy.wait(3500)
     cy.get(':nth-child(3) > .js-panel-title').click()
 
     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(1) > a').click()

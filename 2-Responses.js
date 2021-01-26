@@ -29,6 +29,7 @@ context('Responses', () => {
 
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+   	cy.wait(3000)
 cy.wait('@login')
     cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(3) > a').click()
@@ -219,7 +220,7 @@ cy.wait('@login')
 	cy.get('.ng-tns-c58-44.p-inputwrapper-filled > .custom-dropdown > .p-dropdown-label').click()
 	cy.get(':nth-child(2) > .p-dropdown-item').click()
 	cy.wait('@api')
-	cy.wait(500)
+	cy.wait(1000)
 	cy.get('.p-paginator-current').invoke('text')
       .then((text)=>{
        const toastText = text;

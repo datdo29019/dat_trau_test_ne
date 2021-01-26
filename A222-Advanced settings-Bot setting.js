@@ -29,7 +29,7 @@ context('Advanced-Bot Setting', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
-
+    cy.wait(3500)  
     cy.get(':nth-child(7) > .js-panel-title').click()
     cy.get('.js-collapsed.active > .js-panel-body > :nth-child(1) > a').click()
 

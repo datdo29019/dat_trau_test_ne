@@ -29,12 +29,13 @@ context('Import and export', () => {
  cy.wait('@login')
     //Get Home
     cy.get(':nth-child(2) > .bot-card > .bot-card--main').click()
+    cy.wait(2000)  
 //API
  cy.intercept('/bots').as('bot')
-    cy.wait('@bot')
-    cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
 
-    cy.get(':nth-child(10) > a').click()
+    cy.get(':nth-child(3) > .js-panel-title').click() //Open Conversations
+  cy.wait(1000)
+    cy.get('.js-panel-body > :nth-child(10) > a').click()
 
     cy.get('.pt-3').should('have.contain','Import and export')
 
@@ -66,7 +67,7 @@ cy.get('#p-dialog-12-label > .ng-tns-c21-17')
 cy.get(':nth-child(3) > .mt-3 > span').should('have.contain','Replace the current dataset version with a new one. Note: All intents and entities in the older version will be deleted. File format: JSON')
 
 //import_export_dialog_flow_dataset
-cy.get(':nth-child(4) > .m-0').should('have.contain','import_export_dialog_flow_dataset')
+cy.get(':nth-child(4) > .m-0').should('have.contain','Import & Export dataset with Dialogflow')
 cy.get(':nth-child(4) > :nth-child(2) > .btn').click()
 .should('be.visible')
 cy.get(':nth-child(4) > :nth-child(2) > span').should('have.contain','Export a JSON backup file of the dataset.') 
